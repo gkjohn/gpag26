@@ -1,0 +1,1281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Good Society — An Exhibit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Integrated with nilekaniphilanthropies.org —
+       near-white paper, charcoal ink, single sienna accent.
+       Forest is retained as a CSS token but quietly aliased to ink
+       so prior styling decisions still read; the visual voice is
+       now monochrome + one warm accent. */
+    --paper:        #f2f1ed;   /* outer page — soft warm off-white */
+    --paper-deep:   #e8e6e0;
+    --paper-edge:   #d8d6d0;
+    --ink:          #1f1e1c;
+    --ink-soft:     #56544e;
+    --ink-mute:     #8a8780;
+    --rule:         #d4d2cc;
+    --forest:       #2a2724;   /* aliased to a deep ink — no green */
+    --forest-soft:  #4a4642;
+    --terracotta:   #6e3d2a;   /* the single accent — deep sienna */
+    --terracotta-soft:#9a5e44;
+
+    --serif:  'Spectral', 'Source Serif Pro', Georgia, serif;
+    --sans:   'IBM Plex Sans', system-ui, sans-serif;
+    --mono:   'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+    --col-narrow: 36rem;
+    --col-text:   42rem;
+    --col-wide:   64rem;
+
+    --space-1: .5rem;
+    --space-2: 1rem;
+    --space-3: 1.5rem;
+    --space-4: 2.5rem;
+    --space-5: 4rem;
+    --space-6: 6rem;
+    --space-7: 9rem;
+    --space-8: 13rem;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  /* paper grain overlay */
+  body::before{
+    content:"";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: .35;
+    mix-blend-mode: multiply;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.10  0 0 0 0 0.07  0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* type */
+  h1,h2,h3,h4,.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;color:var(--ink)}
+  .display{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size: clamp(2.6rem, 6.5vw, 6rem);
+    line-height: 1.02;
+    letter-spacing: -.02em;
+  }
+  .display em{font-style:italic;color:var(--forest);font-weight:400}
+  .h-section{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size: clamp(2rem, 4.4vw, 3.6rem);
+    line-height: 1.1;
+    letter-spacing:-.015em;
+  }
+  .h-section em{font-style:italic;color:var(--forest)}
+  .h-sub{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    line-height: 1.25;
+  }
+  .body{
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: var(--col-text);
+  }
+  .body p + p{ margin-top: 1.1em }
+  .lead{
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+  .eyebrow .dot{
+    display:inline-block;width:.35rem;height:.35rem;border-radius:50%;
+    background:var(--terracotta);vertical-align:middle;margin:0 .55rem .1em 0;
+  }
+  .label{
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink-mute);
+  }
+  .meta{
+    font-family:var(--mono);font-size:.72rem;color:var(--ink-mute);
+    letter-spacing:.08em;
+  }
+
+  /* layout */
+  .page{
+    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+  }
+  section{
+    padding-block: var(--space-8);
+    position:relative;
+  }
+  section.compact{ padding-block: var(--space-6) }
+  .container{ max-width: 88rem; margin-inline:auto }
+
+  /* nav */
+  .topnav{
+    position: fixed; top:0; left:0; right:0; z-index:50;
+    padding: 1.1rem clamp(1.25rem, 5vw, 4.5rem);
+    display:flex; justify-content:space-between; align-items:center;
+    font-family: var(--mono); font-size:.72rem; letter-spacing:.18em;
+    text-transform:uppercase; color: var(--ink-mute);
+    background: linear-gradient(to bottom, rgba(241,234,217,.92), rgba(241,234,217,0));
+    backdrop-filter: blur(2px);
+  }
+  .topnav .mark{ color: var(--ink); letter-spacing: .22em }
+  .topnav .right{ display:flex; gap:1.5rem }
+  .topnav a{color:inherit;text-decoration:none}
+  .topnav a:hover{color:var(--forest)}
+  @media (max-width: 720px){ .topnav .right{display:none} }
+
+  /* THRESHOLD / HERO */
+  .threshold{
+    min-height: 100vh;
+    display:grid; grid-template-rows: 1fr auto;
+    padding-block: var(--space-7) var(--space-5);
+  }
+  .threshold .frame{
+    display:grid;
+    grid-template-columns: 1fr;
+    align-content:end;
+    gap: var(--space-4);
+    max-width: 72rem;
+  }
+  .threshold .display{max-width: 22ch}
+  .threshold .display .quiet{color:var(--ink-mute);font-style:italic}
+  .threshold-foot{
+    display:flex; justify-content:space-between; align-items:end;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.25rem;
+    gap: 2rem; flex-wrap:wrap;
+  }
+  .threshold-foot .colophon{max-width: 22rem}
+
+  /* triad — samaaj / sarkaar / bazaar */
+  .triad{
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .triad .cell{
+    padding: var(--space-4) var(--space-3);
+    border-left: 1px solid var(--rule);
+    min-height: 14rem;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .triad .cell:first-child{ border-left: none }
+  .triad .glyph{
+    width:54px;height:54px;margin-bottom:1.25rem;color:var(--forest);
+  }
+  .triad .word{
+    font-family:var(--serif); font-size: 1.5rem; line-height:1.1; color:var(--ink);
+  }
+  .triad .word .en{
+    display:block; font-family:var(--mono); font-size:.7rem;
+    letter-spacing:.22em; text-transform:uppercase; color:var(--ink-mute);
+    margin-top:.5rem;
+  }
+  .triad .note{
+    font-size:.95rem; color:var(--ink-soft); margin-top: 1rem; max-width: 18rem;
+  }
+  @media (max-width: 760px){
+    .triad{ grid-template-columns: 1fr }
+    .triad .cell{ border-left:none; border-top:1px solid var(--rule) }
+    .triad .cell:first-child{ border-top:none }
+  }
+
+  /* PREFACE QUOTE */
+  .preface{
+    max-width: 56rem;
+    margin-inline:auto;
+  }
+  .preface .pull{
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+    line-height: 1.35;
+    color: var(--ink);
+    letter-spacing: -.005em;
+    text-wrap: pretty;
+  }
+  .preface .pull .hl{
+    background: linear-gradient(transparent 62%, rgba(168,85,53,.18) 62%);
+  }
+  .preface .attribution{
+    margin-top: 2.5rem;
+    display:flex; align-items:center; gap:1rem;
+    color: var(--ink-mute);
+  }
+  .preface .attribution .rule{flex:0 0 3rem;height:1px;background:var(--rule)}
+
+  /* TWO QUESTIONS */
+  .twoq-head{
+    display:grid; grid-template-columns: 1fr; gap: var(--space-3);
+    margin-bottom: var(--space-5);
+    max-width: 60rem;
+  }
+  .twoq{
+    display:grid; grid-template-columns: 1fr 1px 1fr;
+    gap: var(--space-5);
+    align-items:start;
+  }
+  .twoq .divider{ background:var(--rule); width:1px; min-height: 14rem }
+  .twoq .q .who{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:1.25rem;display:flex;align-items:center;gap:.6rem}
+  .twoq .q .who .swatch{width:.55rem;height:.55rem;border-radius:50%}
+  .twoq .q.rohini .swatch{background:var(--terracotta)}
+  .twoq .q.nandan .swatch{background:var(--forest)}
+  .twoq .q .ask{
+    font-family:var(--serif); font-weight:300;
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem); line-height:1.25;
+    color: var(--ink); letter-spacing:-.01em;
+  }
+  .twoq .q .ask em{font-style:italic;color:var(--forest)}
+  .twoq .q.rohini .ask em{color:var(--terracotta)}
+  .twoq .q .body{margin-top: 1.5rem}
+
+  .ledger{
+    margin-top: var(--space-5);
+    border-top: 1px solid var(--rule);
+    display:grid; grid-template-columns: repeat(3, 1fr);
+  }
+  .ledger .cell{
+    padding: var(--space-3) var(--space-3) var(--space-3) 0;
+    border-left: 1px solid var(--rule);
+    padding-left: var(--space-3);
+  }
+  .ledger .cell:first-child{border-left:none;padding-left:0}
+  .ledger .num{
+    font-family:var(--serif); font-weight:300;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height:1; letter-spacing:-.02em; color:var(--ink);
+  }
+  .ledger .num .small{font-size:.55em;vertical-align: .55em;color:var(--ink-mute);margin-left:.15em}
+  .ledger .cap{margin-top:.65rem; max-width: 18rem; color:var(--ink-soft); font-size:.95rem}
+  @media (max-width: 800px){
+    .twoq{grid-template-columns:1fr;gap:var(--space-4)}
+    .twoq .divider{display:none}
+    .ledger{grid-template-columns:1fr}
+    .ledger .cell{border-left:none;padding-left:0;border-top:1px solid var(--rule)}
+    .ledger .cell:first-child{border-top:none}
+  }
+
+  /* CHAPTER HEAD (Rohini / Nandan) */
+  .chapter-head{
+    display:grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: var(--space-5);
+    align-items:end;
+    margin-bottom: var(--space-5);
+  }
+  .chapter-head .who-plate{
+    aspect-ratio: 4/5;
+    background: var(--paper-deep);
+    border: 1px solid var(--paper-edge);
+    position:relative; overflow:hidden;
+    max-width: 26rem;
+  }
+  .chapter-head .who-plate .placeholder{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; justify-content:space-between;
+    padding: 1rem;
+    font-family: var(--mono); font-size:.7rem; letter-spacing:.14em;
+    color: var(--ink-mute); text-transform: uppercase;
+  }
+  .who-plate.warm{
+    background:
+      repeating-linear-gradient(135deg, rgba(168,85,53,.06) 0 2px, transparent 2px 14px),
+      var(--paper-deep);
+  }
+  .who-plate.architectural{
+    background:
+      linear-gradient(var(--paper-deep), var(--paper-deep)),
+      var(--paper-deep);
+    background-blend-mode: normal;
+  }
+  .who-plate.architectural::after{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(to right, rgba(42,61,46,.10) 1px, transparent 1px) 0 0 / 28px 100%,
+      linear-gradient(to bottom, rgba(42,61,46,.10) 1px, transparent 1px) 0 0 / 100% 28px;
+  }
+  .chapter-head .name-block .chapter-num{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--ink-mute);
+  }
+  .chapter-head .name-block .name{
+    font-family:var(--serif); font-weight:300;
+    font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+    line-height: 1.05; letter-spacing:-.02em;
+    margin: 1rem 0 1.25rem;
+  }
+  .chapter-head .name-block .pose{
+    font-family:var(--serif); font-style:italic; font-weight:300;
+    font-size: clamp(1.4rem, 2.4vw, 2rem); line-height:1.25;
+  }
+  .chapter-head .name-block .pose .accent{color:var(--terracotta)}
+  .chapter-head.nandan .name-block .pose .accent{color:var(--forest)}
+  @media (max-width: 800px){
+    .chapter-head{grid-template-columns:1fr; gap: var(--space-4)}
+    .chapter-head .who-plate{max-width:none; aspect-ratio: 4/3}
+  }
+
+  /* ORG CARDS — gentle index style */
+  .orgs{
+    display:grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .orgs .org{
+    padding: var(--space-4) var(--space-3) var(--space-4) 0;
+    border-bottom: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+    padding-left: var(--space-4);
+    display:grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+  }
+  .orgs .org:nth-child(odd){border-left:none;padding-left:0}
+  .orgs .org .marker{
+    font-family:var(--mono); font-size:.7rem; letter-spacing:.12em;
+    color: var(--ink-mute); padding-top: .25rem;
+    min-width: 2.2rem;
+  }
+  .orgs .org .org-name{
+    font-family:var(--mono); font-size:.78rem; letter-spacing:.16em;
+    text-transform:uppercase; color: var(--forest); font-weight:500;
+    margin-bottom: .5rem;
+  }
+  .orgs.rohini .org .org-name{color: var(--terracotta)}
+  .orgs .org .desc{
+    font-family:var(--serif); font-weight:400;
+    font-size: 1.15rem; line-height:1.4; color: var(--ink);
+    max-width: 24rem;
+  }
+  .orgs .org .stat{
+    font-family:var(--mono); font-size:.75rem; letter-spacing:.06em;
+    color: var(--ink-mute); margin-top: .9rem;
+  }
+  @media (max-width: 760px){
+    .orgs{grid-template-columns:1fr}
+    .orgs .org, .orgs .org:nth-child(odd){border-left:none;padding-left:0}
+  }
+
+  /* HONORS */
+  .honors{
+    margin-top: var(--space-5);
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    border-top: 1px solid var(--rule);
+    padding-top: var(--space-4);
+  }
+  .honors .honor .label{margin-bottom:.6rem; display:block}
+  .honors .honor .h-title{
+    font-family:var(--serif); font-size: 1.1rem; line-height:1.35; color:var(--ink);
+  }
+  .honors .honor .h-note{font-size:.9rem; color:var(--ink-soft); margin-top:.5rem; max-width: 18rem}
+  @media (max-width: 760px){ .honors{grid-template-columns:1fr} }
+
+  /* PULL QUOTES */
+  .pull-quote{
+    max-width: 56rem;
+    margin: var(--space-6) auto 0;
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+  }
+  .pull-quote .mark-q{
+    font-family: var(--serif); font-style:italic; color:var(--terracotta);
+    font-size: 3rem; line-height: 0; vertical-align: -0.45em; margin-right: .3rem;
+  }
+  .pull-quote .q{
+    font-family: var(--serif); font-weight:300;
+    font-size: clamp(1.6rem, 3.2vw, 2.6rem); line-height:1.3;
+    letter-spacing:-.01em; color: var(--ink);
+  }
+  .pull-quote .cite{
+    margin-top: 1.5rem;
+    font-family: var(--mono); font-size:.72rem; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--ink-mute);
+  }
+
+  /* DPI / BRIDGE */
+  .bridge{
+    background: #221a14; /* deep sienna-ink — warmer than pure charcoal, on-brand */
+    color: var(--paper);
+    margin-inline: calc(-1 * clamp(1.25rem, 5vw, 4.5rem));
+    padding-inline: clamp(1.25rem, 5vw, 4.5rem);
+  }
+  .bridge h2, .bridge .h-section, .bridge .display{color:var(--paper)}
+  .bridge .eyebrow{color:#a8a08b}
+  .bridge .lead{color:#d8d0bc}
+  .bridge .body{color:#bdb59f}
+  .bridge .label{color:#a8a08b}
+  .bridge ::selection{background:var(--terracotta);color:var(--paper)}
+
+  .bridge-grid{
+    margin-top: var(--space-5);
+    display:grid; grid-template-columns: 1fr 1fr;
+    gap: var(--space-5); align-items:start;
+  }
+  .bridge-grid .stack{display:flex;flex-direction:column;gap:1.5rem}
+  .bridge-quote{
+    font-family:var(--serif); font-weight:300;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height:1.2;
+    color: var(--paper); letter-spacing:-.01em;
+  }
+  .bridge-quote em{font-style: italic; color: var(--terracotta-soft)}
+  @media (max-width: 800px){ .bridge-grid{grid-template-columns:1fr} }
+
+  /* RAILS DIAGRAM */
+  .rails-card{
+    background: #2b2017;
+    border: 1px solid #3d2c20;
+    padding: var(--space-4);
+    position:relative;
+  }
+  .rails-card .caption{
+    font-family:var(--mono); font-size:.7rem; letter-spacing:.18em;
+    text-transform:uppercase; color:#a8a08b; margin-bottom:1.5rem;
+  }
+  .rails-svg{width:100%; height:auto; display:block}
+
+  /* IMPACT */
+  .impact{
+    margin-top: var(--space-5);
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid #3d2c20;
+  }
+  .impact .cell{
+    padding: var(--space-4) var(--space-3) var(--space-4) 0;
+    border-left: 1px solid #3d2c20;
+    padding-left: var(--space-4);
+  }
+  .impact .cell:first-child{border-left:none;padding-left:0}
+  .impact .num{
+    font-family:var(--serif); font-weight:300;
+    font-size: clamp(2.6rem, 5vw, 4rem); line-height:.95;
+    color: var(--paper); letter-spacing:-.02em;
+  }
+  .impact .num em{font-style:normal; color: var(--terracotta-soft)}
+  .impact .cap{margin-top: 1rem; color:#bdb59f; font-size:.95rem; max-width: 18rem}
+  @media (max-width: 760px){
+    .impact{grid-template-columns:1fr}
+    .impact .cell{border-left:none;padding-left:0;border-top:1px solid #3d2c20}
+    .impact .cell:first-child{border-top:none}
+  }
+
+  /* POOLS / FIELD */
+  .pools{
+    margin-top: var(--space-5);
+    display:grid; grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .pool{
+    padding: var(--space-4) var(--space-4);
+    border-left: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .pool:nth-child(2n-1){border-left:none}
+  .pool:nth-last-child(-n+2){border-bottom:none}
+  .pool .num{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.22em;
+    color: var(--ink-mute); margin-bottom:1rem;
+  }
+  .pool h3{
+    font-family:var(--serif); font-weight:400;
+    font-size: 1.5rem; line-height: 1.2;
+    color: var(--ink); margin-bottom: .75rem;
+    letter-spacing:-.005em;
+  }
+  .pool .copy{color: var(--ink-soft); font-size: 1rem; line-height:1.6; max-width: 30rem}
+  .pool .partners{
+    margin-top: 1.25rem;
+    font-family: var(--mono); font-size: .7rem; letter-spacing:.06em;
+    color: var(--ink-mute);
+    display:flex; flex-wrap:wrap; gap:.4rem .9rem;
+  }
+  .pool .partners span{position:relative; padding-right:.9rem}
+  .pool .partners span::after{content:"·"; position:absolute; right:0; color:var(--rule)}
+  .pool .partners span:last-child::after{display:none}
+  @media (max-width: 760px){
+    .pools{grid-template-columns:1fr}
+    .pool{border-left:none !important; border-bottom: 1px solid var(--rule)}
+    .pool:last-child{border-bottom:none}
+  }
+
+  /* CLOSING */
+  .closing{
+    text-align:left;
+    padding-block: var(--space-7);
+  }
+  .closing .closing-display{
+    font-family:var(--serif); font-weight:300;
+    font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+    line-height:1.05; letter-spacing:-.02em;
+    max-width: 22ch;
+  }
+  .closing .closing-display em{font-style:italic;color:var(--forest)}
+  .closing-foot{
+    margin-top: var(--space-5);
+    display:grid; grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    border-top: 1px solid var(--rule);
+    padding-top: var(--space-3);
+  }
+  @media (max-width:760px){.closing-foot{grid-template-columns:1fr}}
+
+  /* COLOPHON / FOOTER */
+  footer{
+    padding: var(--space-5) clamp(1.25rem, 5vw, 4.5rem);
+    border-top: 1px solid var(--rule);
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    font-size: .85rem;
+    color: var(--ink-mute);
+  }
+  footer .col h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);font-weight:500;margin-bottom:.9rem}
+  footer p{max-width:22rem;line-height:1.6}
+  @media (max-width: 760px){ footer{grid-template-columns:1fr} }
+
+  /* SECTION INDEX TITLE */
+  .section-mark{
+    display:flex; align-items:baseline; gap:1rem;
+    margin-bottom: var(--space-3);
+  }
+  .section-mark .num{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.22em;
+    color:var(--ink-mute); text-transform: uppercase;
+  }
+  .section-mark .name{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.22em;
+    color: var(--ink-mute); text-transform:uppercase;
+  }
+  .section-mark .rule{flex:1; height:1px; background:var(--rule); margin-left:.5rem; max-width: 18rem}
+
+  /* reveals */
+  .reveal{ opacity:0; transform: translateY(14px); transition: opacity .9s ease, transform .9s ease }
+  .reveal.in{ opacity:1; transform: none }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+  }
+
+  /* archival plate */
+  .plate{
+    background: var(--paper-deep);
+    border: 1px solid var(--paper-edge);
+    position:relative;
+    overflow:hidden;
+  }
+  .plate.stripes{
+    background:
+      repeating-linear-gradient(135deg, rgba(31,28,22,.04) 0 1px, transparent 1px 12px),
+      var(--paper-deep);
+  }
+  .plate.grid::after{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(to right, rgba(31,28,22,.06) 1px, transparent 1px) 0 0 / 24px 100%,
+      linear-gradient(to bottom, rgba(31,28,22,.06) 1px, transparent 1px) 0 0 / 100% 24px;
+  }
+  .plate .corner{
+    position:absolute; bottom:.75rem; left:.75rem; right:.75rem;
+    display:flex; justify-content:space-between; align-items:end;
+    font-family:var(--mono); font-size:.65rem; letter-spacing:.14em;
+    color:var(--ink-mute); text-transform: uppercase;
+  }
+  .plate .corner-top{
+    position:absolute; top:.75rem; left:.75rem; right:.75rem;
+    display:flex; justify-content:space-between;
+    font-family:var(--mono); font-size:.65rem; letter-spacing:.14em;
+    color:var(--ink-mute); text-transform: uppercase;
+  }
+
+  /* PROGRESS RAIL */
+  .progress{
+    position: fixed; top:0; left:0; right:0; height: 2px; z-index: 60;
+    background: transparent;
+  }
+  .progress > .bar{
+    height:100%; width:0%; background: var(--forest);
+    transition: width .15s linear;
+  }
+
+  /* small layout helpers */
+  .row{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  .stretch{display:flex;align-items:stretch}
+  .max-narrow{max-width:var(--col-narrow)}
+  .max-text{max-width:var(--col-text)}
+  .max-wide{max-width:var(--col-wide)}
+  hr.soft{border:none;border-top:1px solid var(--rule);margin: var(--space-4) 0}
+
+  /* prologue line */
+  .prologue{
+    font-family:var(--serif); font-weight:300; font-style:italic;
+    color: var(--ink-mute);
+    font-size: 1.1rem; line-height:1.55;
+    max-width: 32rem;
+  }
+
+  /* a thin "civic" textile stripe motif as divider (terracotta, restrained) */
+  .textile-rule{
+    height: 10px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--terracotta) 0 8px, transparent 8px 14px,
+        var(--terracotta-soft) 14px 16px, transparent 16px 24px);
+    opacity:.45;
+    margin: var(--space-5) 0;
+    width: 100%;
+    max-width: 14rem;
+  }
+
+  /* footnote-style marginalia */
+  .marginalia{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.06em;
+    color: var(--ink-mute);
+    line-height:1.55;
+    max-width: 14rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><div class="bar" id="progressBar"></div></div>
+
+<nav class="topnav" aria-label="exhibit nav">
+  <div class="mark">An Exhibit · 2026</div>
+  <div class="right">
+    <a href="#preface">Preface</a>
+    <a href="#two-questions">Two&nbsp;Questions</a>
+    <a href="#rohini">Society</a>
+    <a href="#nandan">Systems</a>
+    <a href="#bridge">Public&nbsp;Goods</a>
+    <a href="#field">The&nbsp;Field</a>
+  </div>
+</nav>
+
+<!-- ============================================== -->
+<!-- THRESHOLD                                       -->
+<!-- ============================================== -->
+<section class="page threshold" data-screen-label="01 Threshold">
+  <div class="container" style="display:flex; align-items:start; padding-top: 3rem">
+    <div class="eyebrow reveal in"><span class="dot"></span>An exhibit · In quiet rooms</div>
+  </div>
+
+  <div class="container frame">
+    <div class="reveal">
+      <div class="prologue">A conversation, thirty years in.<br>About what a country of one&nbsp;point&nbsp;four billion holds onto<br>when government and markets reach their edge.</div>
+    </div>
+
+    <h1 class="display reveal">
+      What a good<br>society <em>requires.</em>
+    </h1>
+
+    <div class="threshold-foot reveal">
+      <div class="colophon">
+        <div class="label" style="margin-bottom:.6rem">A note before entering</div>
+        <p style="font-size:.95rem; color:var(--ink-soft); line-height:1.6">
+          This is not a record of giving. It is an argument about what makes a society possible — assembled from three decades of practice, two intersecting lives, and the spaces between civil society, state and market.
+        </p>
+      </div>
+      <div class="meta" style="text-align:right">
+        <div>Rohini &amp; Nandan Nilekani</div>
+        <div>Philanthropists · Giving since 1997</div>
+        <div style="margin-top:.5rem; color:var(--ink-mute)">Scroll to begin →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- PREFACE                                         -->
+<!-- ============================================== -->
+<section class="page" id="preface" data-screen-label="02 Preface">
+  <div class="container preface">
+    <div class="section-mark reveal">
+      <span class="num">I.</span><span class="name">Preface</span><span class="rule"></span>
+    </div>
+
+    <p class="pull reveal">
+      “We came into wealth we did not plan for. We realised, early, that it did not fully belong to us. <span class="hl">A country of 1.4 billion people cannot be held together by government and markets alone.</span> It needs something older and harder to measure: a thriving civil society. For almost thirty years, we have tried to help build that. Not as a project. As a practice.”
+    </p>
+
+    <div class="attribution reveal">
+      <span class="rule"></span>
+      <span>Rohini &amp; Nandan Nilekani · First generation · Giving since 1997</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- TRIAD: SAMAAJ / SARKAAR / BAZAAR                -->
+<!-- ============================================== -->
+<section class="page compact" data-screen-label="03 Triad">
+  <div class="container">
+    <div class="section-mark reveal">
+      <span class="num">II.</span><span class="name">A framework, in three words</span><span class="rule"></span>
+    </div>
+
+    <h2 class="h-section reveal" style="max-width: 24ch; margin-bottom: var(--space-4)">
+      What a good society requires.<br><em>Three estates. Each doing what only it can do.</em>
+    </h2>
+
+    <div class="triad reveal">
+      <div class="cell">
+        <div>
+          <svg class="glyph" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.25">
+            <circle cx="20" cy="22" r="6"/><circle cx="40" cy="22" r="6"/><circle cx="30" cy="40" r="6"/>
+            <path d="M20 28 L30 40 M40 28 L30 40 M20 22 L40 22"/>
+          </svg>
+          <div class="word">Samaaj<span class="en">Society</span></div>
+        </div>
+        <div class="note">The first estate. Where trust is made and meaning is held. Relationships, dignity, civic life.</div>
+      </div>
+      <div class="cell">
+        <div>
+          <svg class="glyph" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.25">
+            <rect x="10" y="20" width="40" height="26"/>
+            <path d="M10 20 L30 8 L50 20"/>
+            <path d="M20 46 L20 30 M30 46 L30 30 M40 46 L40 30"/>
+          </svg>
+          <div class="word">Sarkaar<span class="en">State</span></div>
+        </div>
+        <div class="note">The second estate. Mandate, law, the public commitment. Builds for the whole.</div>
+      </div>
+      <div class="cell">
+        <div>
+          <svg class="glyph" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.25">
+            <path d="M10 44 L18 22 L42 22 L50 44 Z"/>
+            <path d="M14 22 L16 14 L44 14 L46 22"/>
+            <path d="M22 44 L22 32 L38 32 L38 44"/>
+          </svg>
+          <div class="word">Bazaar<span class="en">Market</span></div>
+        </div>
+        <div class="note">The third estate. Exchange, enterprise, signal. Builds for margin and motion.</div>
+      </div>
+    </div>
+
+    <p class="body reveal" style="margin-top: var(--space-4); max-width: 48rem">
+      A good society emerges when each does what only it can do — and trusts the others enough to let them. Our work has lived across all three. Separately. Together. In the spaces between.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- TWO QUESTIONS                                   -->
+<!-- ============================================== -->
+<section class="page" id="two-questions" data-screen-label="04 Two Questions">
+  <div class="container">
+    <div class="section-mark reveal">
+      <span class="num">III.</span><span class="name">Two Questions · Thirty Years · One Country</span><span class="rule"></span>
+    </div>
+
+    <div class="twoq-head reveal">
+      <h2 class="h-section">
+        Two questions.<br><em>Thirty years.</em> One country.
+      </h2>
+      <p class="lead">
+        They lived inside the same household and asked different things of it. The exhibit that follows is the conversation between those questions — and what each, eventually, required of the other.
+      </p>
+    </div>
+
+    <div class="twoq">
+      <div class="q rohini reveal">
+        <div class="who"><span class="swatch"></span> Rohini asked</div>
+        <div class="ask">What makes a system <em>worth building?</em></div>
+        <div class="body">
+          <p>She began with people, not platforms. With reading rooms, riverbeds, the inside of a clinic at 6&nbsp;a.m. She asked whether the institutions we build can hold the dignity of those who live inside them.</p>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="q nandan reveal">
+        <div class="who"><span class="swatch"></span> Nandan asked</div>
+        <div class="ask">How do you build systems that <em>work for everyone?</em></div>
+        <div class="body">
+          <p>He began with architecture. With the rails beneath an economy. He asked whether public infrastructure could be built once, openly, so that a billion people could build on top of it without asking permission.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger reveal">
+      <div class="cell">
+        <div class="num">$550m<span class="small">+</span></div>
+        <div class="cap">Given, across the arc of thirty years. Most of it to organisations no-one else was funding yet.</div>
+      </div>
+      <div class="cell">
+        <div class="num">350<span class="small">+</span></div>
+        <div class="cap">Organisations supported — institutions, collectives, field-builders, small experiments.</div>
+      </div>
+      <div class="cell">
+        <div class="num">2017</div>
+        <div class="cap">Year they signed the public commitment to give away the majority of their wealth.</div>
+      </div>
+    </div>
+
+    <div class="pull-quote reveal">
+      <p class="q"><span class="mark-q">“</span>They did not follow these conversations. They <em style="font-style:italic;color:var(--terracotta)">started</em> them.”</p>
+      <div class="cite">Young men &amp; boys · Aging &amp; longevity · Community-led climate resilience · Universal digital payments</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- ROHINI — SOCIETY                                -->
+<!-- ============================================== -->
+<section class="page" id="rohini" data-screen-label="05 Rohini">
+  <div class="container">
+    <div class="section-mark reveal">
+      <span class="num">IV.</span><span class="name">Chapter one — Society</span><span class="rule"></span>
+    </div>
+
+    <div class="chapter-head rohini reveal">
+      <div class="who-plate warm plate">
+        <div class="corner-top"><span>Plate · IV.A</span><span>Bangalore · 2019</span></div>
+        <div class="corner"><span>[ portrait — Rohini Nilekani ]</span><span>archival</span></div>
+      </div>
+      <div class="name-block">
+        <div class="chapter-num">Rohini Nilekani</div>
+        <div class="name">What holds<br>a <em style="font-style:italic;color:var(--terracotta)">society</em> together.</div>
+        <div class="pose">
+          “We cannot be mere consumers of good governance.<br>We must be its <span class="accent">co-creators.</span>”
+        </div>
+        <div class="body" style="margin-top: 1.75rem">
+          <p>
+            Three decades. One question: <em>what does it feel like to be an empowered citizen in India?</em> Not on paper. In courtrooms. Classrooms. Forests. Clinics. Where rights meet reality — or fail to.
+          </p>
+          <p>
+            Ideas before proof. Institutions before scale. Someone had to.
+          </p>
+        </div>
+        <div class="textile-rule" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="orgs rohini">
+      <div class="org reveal">
+        <div class="marker">IV.1</div>
+        <div>
+          <div class="org-name">Pratham Books · StoryWeaver</div>
+          <div class="desc">A book in every child's hand. A story in her mother tongue.</div>
+          <div class="stat">68,000+ stories · 380+ languages · read 34 million times</div>
+        </div>
+      </div>
+      <div class="org reveal">
+        <div class="marker">IV.2</div>
+        <div>
+          <div class="org-name">Arghyam</div>
+          <div class="desc">Water as relationship. Not resource.</div>
+          <div class="stat">2.4M people reached · 12M households · 200+ partners</div>
+        </div>
+      </div>
+      <div class="org reveal">
+        <div class="marker">IV.3</div>
+        <div>
+          <div class="org-name">The Nilekani Centre for Brain &amp; Mind</div>
+          <div class="desc">A patient, long commitment to mental health — research, care and public dialogue.</div>
+          <div class="stat">Endowed · long-horizon · clinical &amp; civic</div>
+        </div>
+      </div>
+      <div class="org reveal">
+        <div class="marker">IV.4</div>
+        <div>
+          <div class="org-name">Climate &amp; Environment</div>
+          <div class="desc">Community-based conservation. Locally relevant climate resilience.</div>
+          <div class="stat">Field-funded · adaptation-first</div>
+        </div>
+      </div>
+      <div class="org reveal">
+        <div class="marker">IV.5</div>
+        <div>
+          <div class="org-name">Gender Equity</div>
+          <div class="desc">For women and girls — and for young men and boys.</div>
+          <div class="stat">Underexplored conversations · started early</div>
+        </div>
+      </div>
+      <div class="org reveal">
+        <div class="marker">IV.6</div>
+        <div>
+          <div class="org-name">300+ organisations supported</div>
+          <div class="desc">Often the first to back them. Most when no-one else would.</div>
+          <div class="stat">Most generous woman philanthropist in India · 5 consecutive years (Edelgive Hurun)</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="body reveal" style="margin-top: var(--space-5); max-width: 46rem; font-family: var(--serif); font-style: italic; font-size: 1.2rem; color: var(--ink)">
+      The throughline is not a sector. It is the slow, unfashionable work of imagining a public — and then funding the people who tend to it.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- NANDAN — SYSTEMS                                -->
+<!-- ============================================== -->
+<section class="page" id="nandan" data-screen-label="06 Nandan">
+  <div class="container">
+    <div class="section-mark reveal">
+      <span class="num">V.</span><span class="name">Chapter two — Systems</span><span class="rule"></span>
+    </div>
+
+    <div class="chapter-head nandan reveal">
+      <div class="who-plate architectural plate">
+        <div class="corner-top"><span>Plate · V.A</span><span>Bengaluru · architecture</span></div>
+        <div class="corner"><span>[ portrait — Nandan Nilekani ]</span><span>archival</span></div>
+      </div>
+      <div class="name-block">
+        <div class="chapter-num">Nandan Nilekani</div>
+        <div class="name">What holds<br>a <em style="font-style:italic;color:var(--forest)">system</em> together.</div>
+        <div class="pose" style="font-style:normal; font-family: var(--serif); font-weight: 400">
+          Infosys, 1981. Seven people. A Pune apartment. <span class="accent">$250.</span>
+        </div>
+        <div class="body" style="margin-top: 1.5rem">
+          <p>One of the companies that made India the world's technology back office. Then he left to do something harder — to build the rails beneath an economy of 1.4 billion people, in the open, for anyone to use.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTITUTIONS GRID -->
+    <div class="orgs">
+      <div class="org reveal">
+        <div class="marker">V.1</div>
+        <div>
+          <div class="org-name">Aadhaar</div>
+          <div class="desc">A verifiable identity for 1.4 billion. For many: the first time the state could see them.</div>
+          <div class="stat">Foundational ID · enrolment infrastructure</div>
+        </div>
+      </div>
+      <div class="org reveal">
+        <div class="marker">V.2</div>
+        <div>
+          <div class="org-name">Digital Public Infrastructure</div>
+          <div class="desc">The architecture of a more equal economy. Open. Interoperable. Built once. Built for everyone to build on.</div>
+          <div class="stat">Reaching over a billion people · adopted across continents</div>
+        </div>
+      </div>
+      <div class="org reveal">
+        <div class="marker">V.3</div>
+        <div>
+          <div class="org-name">G20 Task Force on DPI</div>
+          <div class="desc">Co-chair. The framework now being carried forward across the world.</div>
+          <div class="stat">Multilateral · country-led adoption</div>
+        </div>
+      </div>
+      <div class="org reveal">
+        <div class="marker">V.4</div>
+        <div>
+          <div class="org-name">Institutions that outlast individuals</div>
+          <div class="desc">IIT Bombay. IIHS. NCAER. Long-horizon, civic, durable.</div>
+          <div class="stat">Endowed · multi-decade · research &amp; policy</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="honors reveal">
+      <div class="honor">
+        <span class="label">Recognition</span>
+        <div class="h-title">TIME 100 — the most influential people</div>
+        <div class="h-note">2006 and 2024. Two decades apart.</div>
+      </div>
+      <div class="honor">
+        <span class="label">National Honour</span>
+        <div class="h-title">Padma Bhushan</div>
+        <div class="h-note">India's third-highest civilian award, for distinguished service of a high order.</div>
+      </div>
+      <div class="honor">
+        <span class="label">Practice</span>
+        <div class="h-title">Builder of public rails</div>
+        <div class="h-note">A second career, longer than the first, given to infrastructure no firm could own.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- BRIDGE — DPI / PUBLIC GOODS                     -->
+<!-- ============================================== -->
+<section class="page bridge" id="bridge" data-screen-label="07 Bridge — Public Goods">
+  <div class="container">
+    <div class="section-mark reveal" style="border:none">
+      <span class="num" style="color:#a8a08b">VI.</span>
+      <span class="name" style="color:#a8a08b">The bridge — public goods</span>
+      <span class="rule" style="background:#3d2c20"></span>
+    </div>
+
+    <h2 class="display reveal" style="max-width:18ch; color:var(--paper)">
+      How do you give<br>in a way that <em style="font-style:italic;color:var(--terracotta-soft)">compounds?</em>
+    </h2>
+
+    <div class="bridge-grid">
+      <div class="stack reveal">
+        <p class="bridge-quote">
+          A country of 1.4 billion. Even the largest cheque, deployed as a service, reaches a <em>rounding error.</em>
+        </p>
+        <p class="bridge-quote" style="font-style: italic; color: var(--terracotta-soft)">
+          “Fund the rails. Not the services.”
+        </p>
+        <p class="body" style="color:#bdb59f; max-width:36rem; margin-top:.5rem">
+          Markets build for margin. Governments build for mandate. Protocols come years before scale — and almost only philanthropy can fund them. Patient enough to be wrong. Public enough to be useful when it works.
+        </p>
+      </div>
+
+      <div class="rails-card reveal">
+        <div class="caption">Diagram VI.1 — Rails, not services</div>
+        <svg class="rails-svg" viewBox="0 0 420 260" fill="none" stroke="#a8a08b" stroke-width="1.25" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing=".1em">
+          <!-- bottom rail: identity -->
+          <line x1="20" y1="220" x2="400" y2="220"/>
+          <text x="20" y="238" fill="#a8a08b">IDENTITY · A VERIFIABLE PUBLIC LAYER</text>
+
+          <!-- middle rail: payments -->
+          <line x1="20" y1="170" x2="400" y2="170"/>
+          <text x="20" y="188" fill="#a8a08b">PAYMENTS · OPEN PROTOCOL</text>
+
+          <!-- middle rail: data -->
+          <line x1="20" y1="120" x2="400" y2="120"/>
+          <text x="20" y="138" fill="#a8a08b">CONSENTED DATA · USER-OWNED</text>
+
+          <!-- top rail: AI -->
+          <line x1="20" y1="70" x2="400" y2="70"/>
+          <text x="20" y="88" fill="#a8a08b">AI · LANGUAGE, AGRICULTURE, HEALTH</text>
+
+          <!-- columns: stations -->
+          <g stroke="#3d2c20">
+            <line x1="80"  y1="50" x2="80"  y2="230"/>
+            <line x1="160" y1="50" x2="160" y2="230"/>
+            <line x1="240" y1="50" x2="240" y2="230"/>
+            <line x1="320" y1="50" x2="320" y2="230"/>
+          </g>
+
+          <!-- nodes -->
+          <g fill="#c47a5b" stroke="none">
+            <circle cx="80" cy="220" r="3"/><circle cx="160" cy="220" r="3"/><circle cx="240" cy="220" r="3"/><circle cx="320" cy="220" r="3"/>
+            <circle cx="80" cy="170" r="3"/><circle cx="160" cy="170" r="3"/><circle cx="240" cy="170" r="3"/><circle cx="320" cy="170" r="3"/>
+            <circle cx="80" cy="120" r="3"/><circle cx="160" cy="120" r="3"/><circle cx="240" cy="120" r="3"/><circle cx="320" cy="120" r="3"/>
+            <circle cx="80" cy="70" r="3"/><circle cx="160" cy="70" r="3"/><circle cx="240" cy="70" r="3"/><circle cx="320" cy="70" r="3"/>
+          </g>
+
+          <!-- station labels -->
+          <g fill="#a8a08b">
+            <text x="80"  y="42" text-anchor="middle">CITIZEN</text>
+            <text x="160" y="42" text-anchor="middle">PROVIDER</text>
+            <text x="240" y="42" text-anchor="middle">STATE</text>
+            <text x="320" y="42" text-anchor="middle">PARTNER</text>
+          </g>
+
+          <!-- legend bottom -->
+          <line x1="20" y1="20" x2="50" y2="20" stroke="#c47a5b"/>
+          <text x="58" y="23" fill="#a8a08b">OPEN PROTOCOL · BUILT ONCE</text>
+          <line x1="220" y1="20" x2="250" y2="20" stroke="#3d2c20"/>
+          <text x="258" y="23" fill="#a8a08b">PRIVATE BUILDS ON PUBLIC</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="impact reveal">
+      <div class="cell">
+        <div class="num"><em>2&nbsp;billion</em>+</div>
+        <div class="cap">Vaccine doses delivered on philanthropy-funded rails during the pandemic.</div>
+      </div>
+      <div class="cell">
+        <div class="num"><em>22</em> languages</div>
+        <div class="cap">Open language AI by AI4Bharat — now extending beyond India to the Global Majority.</div>
+      </div>
+      <div class="cell">
+        <div class="num"><em>7&nbsp;million</em></div>
+        <div class="cap">Farmers reached through OpenAgriNet — open agricultural infrastructure.</div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: var(--space-5); max-width: 56rem">
+      <div class="label" style="color:#a8a08b">The invitation</div>
+      <p class="bridge-quote" style="margin-top:.8rem">
+        100 AI diffusion pathways by 2030. Agriculture. Health. Learning. Mobility. Climate.<br>In any country willing to host them. <em>Back a protocol.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- FIELD / POOLS                                   -->
+<!-- ============================================== -->
+<section class="page" id="field" data-screen-label="08 Field">
+  <div class="container">
+    <div class="section-mark reveal">
+      <span class="num">VII.</span><span class="name">What holds the field together</span><span class="rule"></span>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-5); align-items:end">
+      <h2 class="h-section reveal" style="max-width: 18ch">
+        The hardest problems<br>need <em>more than one cheque.</em>
+      </h2>
+      <p class="lead reveal">
+        Pooled capital. Shared risk. Longer patience. The collaboratives we increasingly choose to work through — because the work asks for it.
+      </p>
+    </div>
+
+    <div class="pools">
+      <div class="pool reveal">
+        <div class="num">Pool · 01</div>
+        <h3>Centre for Exponential Change</h3>
+        <p class="copy">A global network supporting system orchestrators — the people who build the connective tissue between civil society, state and market.</p>
+        <div class="partners">
+          <span>Skoll Foundation</span><span>New Profit</span><span>Instituto Beja</span><span>Yellowwoods</span>
+        </div>
+      </div>
+      <div class="pool reveal">
+        <div class="num">Pool · 02</div>
+        <h3>Co-Impact</h3>
+        <p class="copy">Patient capital for systems change in health, education and gender equity. Long horizons. Country-led. Built to outlast its funders.</p>
+        <div class="partners">
+          <span>Global collaborative</span><span>Multi-funder</span><span>Field-led</span>
+        </div>
+      </div>
+      <div class="pool reveal">
+        <div class="num">Pool · 03</div>
+        <h3>Co-Develop</h3>
+        <p class="copy">A pooled fund for country-led adoption of Digital Public Infrastructure, at population scale.</p>
+        <div class="partners">
+          <span>Gates Foundation</span><span>Omidyar Network</span><span>Rockefeller</span><span>Wellcome</span><span>Khosla Family</span><span>Dhanam</span><span>SVCF</span>
+        </div>
+      </div>
+      <div class="pool reveal">
+        <div class="num">Pool · 04</div>
+        <h3>Centre for DPI</h3>
+        <p class="copy">Helping 25+ countries build their own digital public infrastructure. Implementation knowledge. Not export.</p>
+        <div class="partners">
+          <span>Country-led</span><span>Open-source</span><span>Multilateral</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: var(--space-5); display:flex; align-items:end; gap: 2rem; flex-wrap:wrap">
+      <div class="label">The invitation</div>
+      <div class="h-sub serif" style="max-width: 30rem"><em style="font-style:italic; color:var(--terracotta)">Join a pool.</em> Bring a hard problem. Bring a long horizon. Leave the heroics at the door.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- CLOSING                                         -->
+<!-- ============================================== -->
+<section class="page closing" data-screen-label="09 Closing">
+  <div class="container">
+    <div class="section-mark reveal">
+      <span class="num">VIII.</span><span class="name">Closing</span><span class="rule"></span>
+    </div>
+
+    <div class="reveal">
+      <p class="closing-display">
+        Systems without society<br>become <em>extractive.</em><br>
+        Society without systems<br>struggles to <em>scale.</em>
+      </p>
+    </div>
+
+    <div class="closing-foot reveal">
+      <div>
+        <div class="label" style="margin-bottom:.8rem">What this exhibit is, in the end</div>
+        <p class="body" style="max-width: 32rem">
+          Not a record of giving. An argument about what a society requires of itself. The final note is not triumph. It is responsibility — the kind that compounds quietly, over decades, in the spaces between estates.
+        </p>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom:.8rem">Where to begin</div>
+        <p class="body" style="max-width: 28rem">
+          Fund the rails. Or fund the people who tend them. Pick the hard problem you can stay with for ten years. Then join a pool — and let the work be larger than any one cheque.
+        </p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: var(--space-6); max-width: 30rem">
+      <div class="textile-rule" aria-hidden="true"></div>
+      <p class="prologue" style="color:var(--ink)">
+        A country of 1.4 billion cannot be held together<br>
+        by government and markets alone.<br>
+        It needs <em style="color:var(--terracotta)">a thriving civil society.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="col">
+    <h4>The Exhibit</h4>
+    <p>An editorial assemblage drawn from three decades of practice across civil society, state and market. Made with care; meant to be read slowly.</p>
+  </div>
+  <div class="col">
+    <h4>Subjects</h4>
+    <p>Rohini Nilekani · Nandan Nilekani · Samaaj, Sarkaar, Bazaar · Digital Public Infrastructure · Pooled philanthropy · Collaborative stewardship.</p>
+  </div>
+  <div class="col">
+    <h4>Colophon</h4>
+    <p>Set in Spectral and IBM Plex Sans. Built for reading. Reduced-motion friendly. No tracking on this page.</p>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(e){ e.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+
+  // scroll progress
+  (function(){
+    var bar = document.getElementById('progressBar');
+    if(!bar) return;
+    function update(){
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      bar.style.width = pct + '%';
+    }
+    document.addEventListener('scroll', update, { passive:true });
+    update();
+  })();
+</script>
+</body>
+</html>
