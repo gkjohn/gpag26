@@ -9,22 +9,46 @@
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* Integrated with nilekaniphilanthropies.org —
-       near-white paper, charcoal ink, single sienna accent.
-       Forest is retained as a CSS token but quietly aliased to ink
-       so prior styling decisions still read; the visual voice is
-       now monochrome + one warm accent. */
+    /* Paper + ink form the spine. The Nilekani Philanthropies palette
+       is keyed onto the page as section accents — pink for Rohini,
+       mustard for Nandan, blue for the public-goods bridge, green for
+       the field. The peepal leaf appears quietly in the top nav, as
+       a mark of the family's wider philanthropy. */
     --paper:        #f2f1ed;   /* outer page — soft warm off-white */
     --paper-deep:   #e8e6e0;
     --paper-edge:   #d8d6d0;
-    --ink:          #1f1e1c;
+    --ink:          #231f20;   /* RNP brand black */
     --ink-soft:     #56544e;
     --ink-mute:     #8a8780;
     --rule:         #d4d2cc;
-    --forest:       #2a2724;   /* aliased to a deep ink — no green */
+
+    /* RNP brand palette — primary */
+    --brand-green:   #5f9271;
+    --brand-pink:    #eb7677;
+    --brand-blue:    #82bcd3;
+    --brand-mustard: #dc9a15;
+    --brand-black:   #231f20;
+    /* RNP brand palette — secondary (paper-adjacent supports) */
+    --brand-leaf:    #5f9372;
+    --brand-blush:   #f3e1dd;
+    --brand-beige:   #dbd5ca;
+    --brand-sky:     #c7dfe2;
+    --brand-cream:   #fae8c5;
+
+    /* Section accent aliases — used wherever a chapter wants its colour */
+    --accent-rohini: var(--brand-pink);
+    --accent-nandan: var(--brand-mustard);
+    --accent-bridge: var(--brand-blue);
+    --accent-field:  var(--brand-green);
+    --accent-civic:  var(--brand-green);
+
+    /* Legacy tokens — retained for back-compat, retuned to the brand.
+       --forest stays as deep ink so generic h-section italics read
+       quietly editorial; chapter spots override to brand colour. */
+    --forest:       #2a2724;
     --forest-soft:  #4a4642;
-    --terracotta:   #6e3d2a;   /* the single accent — deep sienna */
-    --terracotta-soft:#9a5e44;
+    --terracotta:   #c4524d;   /* a printable, paper-friendly pink */
+    --terracotta-soft: var(--brand-pink);
 
     --serif:  'Spectral', 'Source Serif Pro', Georgia, serif;
     --sans:   'IBM Plex Sans', system-ui, sans-serif;
@@ -149,10 +173,19 @@
     background: linear-gradient(to bottom, rgba(241,234,217,.92), rgba(241,234,217,0));
     backdrop-filter: blur(2px);
   }
-  .topnav .mark{ color: var(--ink); letter-spacing: .22em }
+  .topnav .mark{
+    color: var(--ink); letter-spacing: .22em;
+    display:inline-flex; align-items:center; gap:.6rem;
+  }
+  .topnav .mark .peepal{
+    width: .95rem; height: .95rem;
+    color: var(--brand-green);
+    flex: 0 0 auto;
+    transform: translateY(-1px);
+  }
   .topnav .right{ display:flex; gap:1.5rem }
   .topnav a{color:inherit;text-decoration:none}
-  .topnav a:hover{color:var(--forest)}
+  .topnav a:hover{color:var(--accent-rohini)}
   @media (max-width: 720px){ .topnav .right{display:none} }
 
   /* THRESHOLD / HERO */
@@ -194,6 +227,19 @@
   .triad .glyph{
     width:54px;height:54px;margin-bottom:1.25rem;color:var(--forest);
   }
+  /* triad — semantic brand colour per estate */
+  .triad .cell.samaaj  .glyph{ color: var(--brand-green) }
+  .triad .cell.sarkaar .glyph{ color: var(--brand-blue) }
+  .triad .cell.bazaar  .glyph{ color: var(--brand-mustard) }
+  .triad .cell.samaaj  .word .en::before,
+  .triad .cell.sarkaar .word .en::before,
+  .triad .cell.bazaar  .word .en::before{
+    content:""; display:inline-block; width:.42rem; height:.42rem;
+    border-radius:50%; vertical-align: .05em; margin-right:.55rem;
+  }
+  .triad .cell.samaaj  .word .en::before{ background: var(--brand-green) }
+  .triad .cell.sarkaar .word .en::before{ background: var(--brand-blue) }
+  .triad .cell.bazaar  .word .en::before{ background: var(--brand-mustard) }
   .triad .word{
     font-family:var(--serif); font-size: 1.5rem; line-height:1.1; color:var(--ink);
   }
@@ -226,7 +272,8 @@
     text-wrap: pretty;
   }
   .preface .pull .hl{
-    background: linear-gradient(transparent 62%, rgba(168,85,53,.18) 62%);
+    /* soft brand-blush wash beneath the highlighted line */
+    background: linear-gradient(transparent 62%, rgba(235,118,119,.20) 62%);
   }
   .preface .attribution{
     margin-top: 2.5rem;
@@ -249,15 +296,15 @@
   .twoq .divider{ background:var(--rule); width:1px; min-height: 14rem }
   .twoq .q .who{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:1.25rem;display:flex;align-items:center;gap:.6rem}
   .twoq .q .who .swatch{width:.55rem;height:.55rem;border-radius:50%}
-  .twoq .q.rohini .swatch{background:var(--terracotta)}
-  .twoq .q.nandan .swatch{background:var(--forest)}
+  .twoq .q.rohini .swatch{background:var(--accent-rohini)}
+  .twoq .q.nandan .swatch{background:var(--accent-nandan)}
   .twoq .q .ask{
     font-family:var(--serif); font-weight:300;
     font-size: clamp(1.5rem, 2.4vw, 2.1rem); line-height:1.25;
     color: var(--ink); letter-spacing:-.01em;
   }
-  .twoq .q .ask em{font-style:italic;color:var(--forest)}
-  .twoq .q.rohini .ask em{color:var(--terracotta)}
+  .twoq .q .ask em{font-style:italic;color:var(--accent-nandan)}
+  .twoq .q.rohini .ask em{color:var(--accent-rohini)}
   .twoq .q .body{margin-top: 1.5rem}
 
   .ledger{
@@ -339,8 +386,8 @@
     font-family:var(--serif); font-style:italic; font-weight:300;
     font-size: clamp(1.4rem, 2.4vw, 2rem); line-height:1.25;
   }
-  .chapter-head .name-block .pose .accent{color:var(--terracotta)}
-  .chapter-head.nandan .name-block .pose .accent{color:var(--forest)}
+  .chapter-head .name-block .pose .accent{color:var(--accent-rohini)}
+  .chapter-head.nandan .name-block .pose .accent{color:var(--accent-nandan)}
   @media (max-width: 800px){
     .chapter-head{grid-template-columns:1fr; gap: var(--space-4)}
     .chapter-head .who-plate{max-width:none; aspect-ratio: 4/3}
@@ -368,10 +415,10 @@
   }
   .orgs .org .org-name{
     font-family:var(--mono); font-size:.78rem; letter-spacing:.16em;
-    text-transform:uppercase; color: var(--forest); font-weight:500;
+    text-transform:uppercase; color: var(--accent-nandan); font-weight:500;
     margin-bottom: .5rem;
   }
-  .orgs.rohini .org .org-name{color: var(--terracotta)}
+  .orgs.rohini .org .org-name{color: var(--accent-rohini)}
   .orgs .org .desc{
     font-family:var(--serif); font-weight:400;
     font-size: 1.15rem; line-height:1.4; color: var(--ink);
@@ -438,7 +485,7 @@
   .bridge .lead{color:#d8d0bc}
   .bridge .body{color:#bdb59f}
   .bridge .label{color:#a8a08b}
-  .bridge ::selection{background:var(--terracotta);color:var(--paper)}
+  .bridge ::selection{background:var(--accent-bridge);color:var(--brand-black)}
 
   .bridge-grid{
     margin-top: var(--space-5);
@@ -451,7 +498,7 @@
     font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height:1.2;
     color: var(--paper); letter-spacing:-.01em;
   }
-  .bridge-quote em{font-style: italic; color: var(--terracotta-soft)}
+  .bridge-quote em{font-style: italic; color: var(--accent-bridge)}
   @media (max-width: 800px){ .bridge-grid{grid-template-columns:1fr} }
 
   /* RAILS DIAGRAM */
@@ -484,7 +531,7 @@
     font-size: clamp(2.6rem, 5vw, 4rem); line-height:.95;
     color: var(--paper); letter-spacing:-.02em;
   }
-  .impact .num em{font-style:normal; color: var(--terracotta-soft)}
+  .impact .num em{font-style:normal; color: var(--accent-bridge)}
   .impact .cap{margin-top: 1rem; color:#bdb59f; font-size:.95rem; max-width: 18rem}
   @media (max-width: 760px){
     .impact{grid-template-columns:1fr}
@@ -675,7 +722,14 @@
 <div class="progress" aria-hidden="true"><div class="bar" id="progressBar"></div></div>
 
 <nav class="topnav" aria-label="exhibit nav">
-  <div class="mark">A Good Society</div>
+  <div class="mark">
+    <svg class="peepal" viewBox="0 0 28 28" fill="currentColor" aria-hidden="true">
+      <title>Nilekani Philanthropies</title>
+      <path d="M14 1 C 11.5 4 9 7 8 11 C 7 14 7 17 8 19 C 9 21.5 11 22.5 13 22 C 13.2 21.4 13.5 21 14 21 C 14.5 21 14.8 21.4 15 22 C 17 22.5 19 21.5 20 19 C 21 17 21 14 20 11 C 19 7 16.5 4 14 1 Z"/>
+      <line x1="14" y1="22" x2="14" y2="26.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <span>A Good Society</span>
+  </div>
   <div class="right">
     <a href="#preface">Preface</a>
     <a href="#triad">Triad</a>
@@ -751,7 +805,7 @@
     </h2>
 
     <div class="triad reveal">
-      <div class="cell">
+      <div class="cell samaaj">
         <div>
           <svg class="glyph" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.25">
             <circle cx="20" cy="22" r="6"/><circle cx="40" cy="22" r="6"/><circle cx="30" cy="40" r="6"/>
@@ -761,7 +815,7 @@
         </div>
         <div class="note">The first estate. Where trust is made and meaning is held. Relationships, dignity, civic life.</div>
       </div>
-      <div class="cell">
+      <div class="cell sarkaar">
         <div>
           <svg class="glyph" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.25">
             <rect x="10" y="20" width="40" height="26"/>
@@ -772,7 +826,7 @@
         </div>
         <div class="note">The second estate. Mandate, law, the public commitment. Builds for the whole.</div>
       </div>
-      <div class="cell">
+      <div class="cell bazaar">
         <div>
           <svg class="glyph" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.25">
             <path d="M10 44 L18 22 L42 22 L50 44 Z"/>
@@ -843,7 +897,7 @@
     </div>
 
     <div class="pull-quote reveal">
-      <p class="q"><span class="mark-q">“</span>They did not follow these conversations. They <em style="font-style:italic;color:var(--terracotta)">started</em> them.”</p>
+      <p class="q"><span class="mark-q">“</span>They did not follow these conversations. They <em style="font-style:italic;color:var(--accent-rohini)">started</em> them.”</p>
       <div class="cite">Young men &amp; boys · Aging &amp; longevity · Community-led climate resilience · Universal digital payments</div>
     </div>
   </div>
@@ -861,7 +915,7 @@
     <div class="chapter-head rohini reveal" style="grid-template-columns:1fr">
       <div class="name-block">
         <div class="chapter-num">Rohini Nilekani</div>
-        <div class="name">What holds<br>a <em style="font-style:italic;color:var(--terracotta)">society</em> together.</div>
+        <div class="name">What holds<br>a <em style="font-style:italic;color:var(--accent-rohini)">society</em> together.</div>
         <div class="pose">
           “We cannot be mere consumers of good governance.<br>We must be its <span class="accent">co-creators.</span>”
         </div>
@@ -946,7 +1000,7 @@
     <div class="chapter-head nandan reveal" style="grid-template-columns:1fr">
       <div class="name-block">
         <div class="chapter-num">Nandan Nilekani</div>
-        <div class="name">What holds<br>a <em style="font-style:italic;color:var(--forest)">system</em> together.</div>
+        <div class="name">What holds<br>a <em style="font-style:italic;color:var(--accent-nandan)">system</em> together.</div>
         <div class="pose" style="font-style:normal; font-family: var(--serif); font-weight: 400">
           Infosys, 1981. Seven people. A Pune apartment. <span class="accent">$250.</span>
         </div>
@@ -1024,7 +1078,7 @@
     </div>
 
     <h2 class="display reveal" style="max-width:18ch; color:var(--paper)">
-      How do you give<br>in a way that <em style="font-style:italic;color:var(--terracotta-soft)">compounds?</em>
+      How do you give<br>in a way that <em style="font-style:italic;color:var(--accent-bridge)">compounds?</em>
     </h2>
 
     <div class="bridge-grid">
@@ -1032,7 +1086,7 @@
         <p class="bridge-quote">
           A country of 1.4 billion. Even the largest cheque, deployed as a service, reaches a <em>rounding error.</em>
         </p>
-        <p class="bridge-quote" style="font-style: italic; color: var(--terracotta-soft)">
+        <p class="bridge-quote" style="font-style: italic; color: var(--accent-bridge)">
           “Fund the rails. Not the services.”
         </p>
         <p class="body" style="color:#bdb59f; max-width:36rem; margin-top:.5rem">
@@ -1067,8 +1121,8 @@
             <line x1="320" y1="50" x2="320" y2="230"/>
           </g>
 
-          <!-- nodes -->
-          <g fill="#c47a5b" stroke="none">
+          <!-- nodes — brand blue, on the dark sienna ground -->
+          <g fill="#82bcd3" stroke="none">
             <circle cx="80" cy="220" r="3"/><circle cx="160" cy="220" r="3"/><circle cx="240" cy="220" r="3"/><circle cx="320" cy="220" r="3"/>
             <circle cx="80" cy="170" r="3"/><circle cx="160" cy="170" r="3"/><circle cx="240" cy="170" r="3"/><circle cx="320" cy="170" r="3"/>
             <circle cx="80" cy="120" r="3"/><circle cx="160" cy="120" r="3"/><circle cx="240" cy="120" r="3"/><circle cx="320" cy="120" r="3"/>
@@ -1084,7 +1138,7 @@
           </g>
 
           <!-- legend bottom -->
-          <line x1="20" y1="20" x2="50" y2="20" stroke="#c47a5b"/>
+          <line x1="20" y1="20" x2="50" y2="20" stroke="#82bcd3"/>
           <text x="58" y="23" fill="#a8a08b">OPEN PROTOCOL · BUILT ONCE</text>
           <line x1="220" y1="20" x2="250" y2="20" stroke="#3d2c20"/>
           <text x="258" y="23" fill="#a8a08b">PRIVATE BUILDS ON PUBLIC</text>
@@ -1171,7 +1225,7 @@
 
     <div class="reveal" style="margin-top: var(--space-5); display:flex; align-items:end; gap: 2rem; flex-wrap:wrap">
       <div class="label">The invitation</div>
-      <div class="h-sub serif" style="max-width: 30rem"><em style="font-style:italic; color:var(--terracotta)">Join a pool.</em> Bring a hard problem. Bring a long horizon. Leave the heroics at the door.</div>
+      <div class="h-sub serif" style="max-width: 30rem"><em style="font-style:italic; color:var(--accent-field)">Join a pool.</em> Bring a hard problem. Bring a long horizon. Leave the heroics at the door.</div>
     </div>
   </div>
 </section>
@@ -1212,8 +1266,15 @@
       <p class="prologue" style="color:var(--ink)">
         A country of 1.4 billion cannot be held together<br>
         by government and markets alone.<br>
-        It needs <em style="color:var(--terracotta)">a thriving civil society.</em>
+        It needs <em style="color:var(--accent-civic)">a thriving civil society.</em>
       </p>
+      <div style="margin-top: 1.75rem; display:flex; align-items:center; gap:.65rem">
+        <svg viewBox="0 0 28 28" width="18" height="18" fill="currentColor" aria-hidden="true" style="color: var(--brand-green)">
+          <path d="M14 1 C 11.5 4 9 7 8 11 C 7 14 7 17 8 19 C 9 21.5 11 22.5 13 22 C 13.2 21.4 13.5 21 14 21 C 14.5 21 14.8 21.4 15 22 C 17 22.5 19 21.5 20 19 C 21 17 21 14 20 11 C 19 7 16.5 4 14 1 Z"/>
+          <line x1="14" y1="22" x2="14" y2="26.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span class="meta" style="letter-spacing:.18em">Nilekani Philanthropies</span>
+      </div>
     </div>
   </div>
 </section>
