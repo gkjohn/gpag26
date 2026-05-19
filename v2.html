@@ -147,9 +147,21 @@
   @media (max-width:760px){.topnav .right{display:none}}
 
   /* ---- Threshold ------------------------------------------------- */
-  .threshold{display:grid;padding-block:var(--space-7) var(--space-6)}
-  .threshold .frame{display:grid;grid-template-columns:1fr;align-content:center;gap:var(--space-4);max-width:72rem}
+  .threshold{display:grid;padding-block:var(--space-7) var(--space-6);
+    position:relative;overflow:hidden}
+  .threshold .frame{display:grid;grid-template-columns:1fr;align-content:center;
+    gap:var(--space-4);max-width:72rem;position:relative;z-index:1}
   .threshold .display{max-width:18ch}
+  .leaf-ornament{
+    position:absolute;top:50%;right:-3%;transform:translateY(-50%);
+    height:120%;width:auto;opacity:.06;mix-blend-mode:multiply;
+    pointer-events:none;user-select:none;z-index:0;
+  }
+  @media (max-width:1000px){.leaf-ornament{right:-22%;opacity:.045}}
+  @media (max-width:760px){.leaf-ornament{display:none}}
+  /* closing sign-off — official NP logo */
+  .np-signoff{display:inline-block;margin-top:var(--space-4)}
+  .np-signoff img{height:140px;width:auto;display:block}
   .threshold-foot{display:flex;justify-content:space-between;align-items:end;
     border-top:1px solid var(--rnp-beige);padding-top:1.5rem;gap:2rem;flex-wrap:wrap}
   .threshold-foot .colophon{max-width:30rem}
@@ -425,7 +437,7 @@
 <!-- ============================================== -->
 <!-- THRESHOLD                                       -->
 <!-- ============================================== -->
-<section class="page threshold" data-screen-label="01 Threshold">
+<section class="page threshold" data-screen-label="01 Threshold"><img class="leaf-ornament" src="assets/peepal-ornament.png" alt="" aria-hidden="true" width="733" height="1500">
   <div class="container frame">
     <div class="reveal">
       <div class="prologue">A conversation, thirty years in.<br>About what a country of one&nbsp;point&nbsp;four billion holds onto<br>when government and markets reach their edge.</div>
@@ -1031,10 +1043,7 @@
         Not to claim its fruits.<br>
         Nor to retreat from the act<br>for <em>fear</em> of them.
       </p>
-      <div style="margin-top: var(--space-4); display:flex; align-items:center; gap:.7rem">
-        <svg viewBox="0 0 64 80" width="20" height="25" fill="currentColor" aria-hidden="true" style="color: var(--brand-green)"><path fill-rule="evenodd" d="M32 2 C 40 12, 56 18, 60 36 C 62 50, 52 64, 38 72 L 36 78 Q 32 80, 28 78 L 26 72 C 12 64, 2 50, 4 36 C 8 18, 24 12, 32 2 Z M 32 14 C 28 22, 18 28, 14 38 C 13 46, 18 54, 28 60 L 32 24 L 36 60 C 46 54, 51 46, 50 38 C 46 28, 36 22, 32 14 Z"/></svg>
-        <span class="meta" style="letter-spacing:.18em"><a class="ref" href="https://nilekaniphilanthropies.org/" target="_blank" rel="noopener noreferrer">Rohini &amp; Nandan Nilekani</a></span>
-      </div>
+      <a href="https://nilekaniphilanthropies.org/" target="_blank" rel="noopener noreferrer" aria-label="Nilekani Philanthropies" class="np-signoff"><img src="assets/np-logo.png" alt="Nilekani Philanthropies" width="494" height="560"></a>
     </div>
   </div>
 </section>
