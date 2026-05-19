@@ -110,14 +110,22 @@
   .eyebrow .dot{display:inline-block;width:.4rem;height:.4rem;border-radius:50%;
     background:var(--rnp-mustard);vertical-align:middle;margin:0 .55rem .12em 0}
 
-  /* ---- Links — RNP house style ----------------------------------- */
+  /* ---- Links — RNP "underline slides in from left" --------------- */
   a.ref{
-    color:inherit;text-decoration:underline;text-decoration-thickness:1px;
-    text-underline-offset:4px;text-decoration-color:var(--rnp-beige);
-    transition:color var(--ease) .25s, text-decoration-color .25s var(--ease);
+    color:inherit;text-decoration:none;
+    padding-bottom:.14em;
+    background-image:
+      linear-gradient(currentColor,currentColor),
+      linear-gradient(var(--rnp-beige),var(--rnp-beige));
+    background-repeat:no-repeat,no-repeat;
+    background-size:0 1.5px,100% 1px;
+    background-position:left 100%,left 100%;
+    transition:background-size .35s var(--ease),color .25s var(--ease);
   }
-  a.ref:hover,a.ref:focus-visible{color:var(--rnp-mustard);
-    text-decoration-color:var(--rnp-mustard);outline:none}
+  a.ref:hover,a.ref:focus-visible{
+    color:var(--rnp-mustard);
+    background-size:100% 1.5px,100% 1px;outline:none;
+  }
   :focus-visible{outline:2px solid var(--rnp-green);outline-offset:3px;border-radius:2px}
 
   /* ---- Layout ---------------------------------------------------- */
@@ -145,6 +153,30 @@
     letter-spacing:.03em;text-transform:none;color:var(--ink);text-decoration:none}
   .topnav a:hover{color:var(--rnp-mustard)}
   @media (max-width:760px){.topnav .right{display:none}}
+
+  /* ---- Section rhythm — soft freeform colour-washes -------------- */
+  /* colour does the dividing; warm/cool washes alternate, white
+     cards and pebbles read crisply on top. */
+  .threshold{
+    background:
+      radial-gradient(135% 115% at 82% 12%,
+        #F7E7E2 0%, #F4ECE2 38%, var(--bg-page) 72%);
+  }
+  #rohini{
+    background:
+      radial-gradient(120% 90% at 12% 0%,
+        #F8E6E2 0%, #F6EBE4 45%, var(--bg-page) 78%);
+  }
+  #nandan{
+    background:
+      radial-gradient(120% 90% at 88% 0%,
+        #F1E7D4 0%, #F4EEE1 45%, var(--bg-page) 78%);
+  }
+  #field{
+    background:
+      radial-gradient(120% 95% at 15% 4%,
+        #E6F0E3 0%, #EDF1E7 45%, var(--bg-page) 80%);
+  }
 
   /* ---- Threshold ------------------------------------------------- */
   .threshold{display:grid;padding-block:var(--space-7) var(--space-6);
@@ -176,23 +208,37 @@
     color:var(--rnp-mustard)}
   .preface .attribution .rule{flex:0 0 3rem;height:1px;background:var(--rnp-beige)}
 
-  /* ---- Triad — textured river-worn pebbles ----------------------- */
-  .triad{display:grid;grid-template-columns:repeat(3,1fr);gap:2.25rem;
-    align-items:center;border:0}
+  /* ---- Triad — hand-tuned river-worn pebble cluster -------------- */
+  .triad{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;
+    align-items:center;border:0;position:relative}
+  /* a small accent pebble, tucked behind the cluster (RNP: two or
+     three, overlapping, one dominant) */
+  .triad::before{
+    content:"";position:absolute;z-index:0;pointer-events:none;
+    width:210px;height:170px;right:-1.25rem;bottom:-2.25rem;
+    background-color:var(--rnp-blush);
+    background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='320'%20height='320'%3E%3Cfilter%20id='p'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'%20seed='7'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.93%20%200%200%200%200%200.89%20%200%200%200%200%200.80%20%200%200%200%200.20%200'/%3E%3C/filter%3E%3Crect%20width='320'%20height='320'%20filter='url(%23p)'/%3E%3C/svg%3E");background-size:300px 300px;
+    background-blend-mode:multiply;
+    border-radius:64% 36% 52% 48% / 60% 46% 54% 40%;
+    box-shadow:0 3px 18px rgba(35,31,32,.05);
+  }
   .triad .cell{
-    border:0!important;padding:3rem 2.75rem;
+    border:0!important;padding:3rem 2.75rem;position:relative;z-index:1;
     display:flex;flex-direction:column;gap:.9rem;
     background-repeat:repeat;background-size:300px 300px;
     background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='320'%20height='320'%3E%3Cfilter%20id='p'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'%20seed='7'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.93%20%200%200%200%200%200.89%20%200%200%200%200%200.80%20%200%200%200%200.20%200'/%3E%3C/filter%3E%3Crect%20width='320'%20height='320'%20filter='url(%23p)'/%3E%3C/svg%3E");background-blend-mode:multiply;
-    box-shadow:0 3px 16px rgba(35,31,32,.06);
+    box-shadow:0 4px 20px rgba(35,31,32,.06);
   }
+  /* each silhouette individually shaped — no two alike */
   .triad .cell.samaaj{background-color:var(--rnp-light-green);
-    border-radius:63% 37% 56% 44% / 57% 52% 48% 43%;transform:translateY(1.25rem)}
+    border-radius:69% 31% 58% 42% / 55% 64% 36% 45%;
+    transform:translateY(1.5rem) rotate(-1.5deg)}
   .triad .cell.sarkaar{background-color:var(--rnp-light-blue);
-    border-radius:47% 53% 44% 56% / 58% 46% 54% 42%;
-    transform:translateY(-1.5rem) scale(1.05);position:relative;z-index:2}
+    border-radius:45% 55% 50% 50% / 64% 41% 59% 36%;
+    transform:translateY(-1.75rem) scale(1.06);z-index:2}
   .triad .cell.bazaar{background-color:var(--rnp-light-yellow);
-    border-radius:55% 45% 61% 39% / 46% 57% 43% 54%;transform:translateY(.5rem)}
+    border-radius:55% 45% 67% 33% / 42% 59% 41% 58%;
+    transform:translateY(.75rem) rotate(1.5deg)}
   .triad .glyph{width:50px;height:50px;margin-bottom:.3rem}
   .triad .cell.samaaj .glyph{color:#4C7D5E}
   .triad .cell.sarkaar .glyph{color:#3F8BA6}
@@ -206,6 +252,7 @@
     margin-top:.2rem;max-width:20rem}
   @media (max-width:820px){
     .triad{grid-template-columns:1fr;gap:1.25rem;align-items:stretch}
+    .triad::before{display:none}
     .triad .cell,.triad .cell.samaaj,
     .triad .cell.sarkaar,.triad .cell.bazaar{transform:none}
   }
@@ -246,7 +293,7 @@
   .chapter-head{display:grid;grid-template-columns:1fr;gap:var(--space-4);
     align-items:end;margin-bottom:var(--space-5)}
   .chapter-num{margin-bottom:.25rem}
-  .chapter-num a.ref{color:inherit;text-decoration-color:rgba(220,154,21,.4)}
+  .chapter-num a.ref{color:inherit}
   .chapter-head .name{font-family:var(--serif);font-weight:500;
     font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:1.05;margin:1rem 0 1.25rem}
   .chapter-head .pose{font-family:var(--emph);font-style:italic;font-weight:400;
@@ -285,7 +332,10 @@
 
   /* ---- Bridge — light blue colour-wash (NOT a dark band) --------- */
   .bridge{
-    background:var(--rnp-light-blue);
+    background-color:var(--rnp-light-blue);
+    background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='480'%20height='480'%3E%3Cfilter%20id='m'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.012'%20numOctaves='3'%20seed='11'/%3E%3CfeColorMatrix%20values='0%200%200%200%201%20%200%200%200%200%201%20%200%200%200%200%201%20%200%200%200%200.55%200'/%3E%3CfeGaussianBlur%20stdDeviation='1.2'/%3E%3C/filter%3E%3Crect%20width='480'%20height='480'%20filter='url(%23m)'/%3E%3C/svg%3E");
+    background-size:760px 760px;background-position:center;
+    background-blend-mode:soft-light;
     color:var(--ink);
     margin-inline:calc(-1*clamp(1.25rem,5vw,4.5rem));
     padding-inline:clamp(1.25rem,5vw,4.5rem);
@@ -336,7 +386,7 @@
   .case .case-id .org{display:flex;align-items:baseline;gap:.5rem;color:var(--rnp-green)}
   .case .case-id .org::before{content:"";width:.42rem;height:.42rem;border-radius:50%;
     background:var(--rnp-green);flex:0 0 auto;transform:translateY(-.05em)}
-  .case .case-id .org a.ref{color:inherit;text-decoration-color:rgba(95,146,113,.4)}
+  .case .case-id .org a.ref{color:inherit}
   .case .case-id .domain{font-family:var(--sans);font-weight:500;font-size:.78rem;
     letter-spacing:.02em;text-transform:none;color:var(--fg3)}
   .case .case-body .claim{font-family:var(--serif);font-weight:500;
@@ -356,7 +406,7 @@
   .case .case-list .item{display:grid;grid-template-columns:13rem 1fr;gap:1rem;align-items:baseline}
   .case .case-list .item .k{font-family:var(--serif);font-weight:700;font-size:.7rem;
     letter-spacing:.1em;text-transform:uppercase;color:var(--rnp-green)}
-  .case .case-list .item .k a.ref{color:inherit;text-decoration-color:rgba(95,146,113,.4)}
+  .case .case-list .item .k a.ref{color:inherit}
   .case .case-list .item .v{font-family:var(--sans);color:var(--fg2);font-size:.98rem;line-height:1.5}
   @media (max-width:800px){
     .case{grid-template-columns:1fr;gap:var(--space-3)}
@@ -393,7 +443,7 @@
     font-size:clamp(2.4rem,5.5vw,4.2rem);line-height:1.05;max-width:22ch}
   .closing-foot{margin-top:var(--space-5);display:grid;grid-template-columns:1fr;
     gap:var(--space-4);border-top:1px solid var(--rnp-beige);padding-top:var(--space-3)}
-  .closing .meta a.ref{color:inherit;text-decoration-color:rgba(220,154,21,.4)}
+  .closing .meta a.ref{color:inherit}
 
   /* ---- Reveal — calm fade ---------------------------------------- */
   .reveal{opacity:0;transform:translateY(14px);
@@ -410,6 +460,35 @@
   .max-text{max-width:var(--col-text)}
   .max-wide{max-width:var(--col-wide)}
   hr.soft{border:0;border-top:1px solid var(--rnp-beige);margin:var(--space-4) 0}
+
+  /* ---- Footer — RNP dark colophon -------------------------------- */
+  .rnp-footer{background:#231F20;color:#C7C0B2;
+    padding:var(--space-7) clamp(1.25rem,5vw,4.5rem) var(--space-4)}
+  .rnp-footer .foot-inner{max-width:1240px;margin-inline:auto;
+    display:grid;grid-template-columns:1.5fr 1fr;gap:var(--space-6)}
+  .rnp-footer .foot-mark{display:flex;align-items:center;gap:.6rem;
+    font-family:var(--serif);font-weight:700;letter-spacing:.02em;
+    color:#fff;font-size:1rem;margin-bottom:1.1rem}
+  .rnp-footer .foot-mark svg{width:18px;height:23px;fill:var(--rnp-mustard);flex:0 0 auto}
+  .rnp-footer .foot-brand p{font-family:var(--sans);font-size:.9rem;
+    line-height:1.7;color:#9C958C;max-width:46ch;margin:0}
+  .rnp-footer .foot-nav{display:grid;grid-template-columns:1fr 1fr;
+    gap:.7rem 1.5rem;align-content:start}
+  .rnp-footer .foot-nav a{font-family:var(--serif);font-weight:500;
+    font-size:.82rem;letter-spacing:.02em;color:#C7C0B2;text-decoration:none;
+    transition:color .2s var(--ease)}
+  .rnp-footer .foot-nav a:hover{color:var(--rnp-mustard)}
+  .rnp-footer .foot-bottom{max-width:1240px;margin:var(--space-5) auto 0;
+    border-top:1px solid #3A3536;padding-top:var(--space-3);
+    display:flex;justify-content:space-between;gap:1rem 2rem;flex-wrap:wrap;
+    font-family:var(--serif);font-weight:600;font-size:.72rem;
+    letter-spacing:.1em;text-transform:uppercase;color:#7A7370}
+  .rnp-footer .foot-bottom a{color:#7A7370;text-decoration:none;
+    transition:color .2s var(--ease)}
+  .rnp-footer .foot-bottom a:hover{color:var(--rnp-mustard)}
+  @media (max-width:760px){
+    .rnp-footer .foot-inner{grid-template-columns:1fr;gap:var(--space-4)}
+  }
 </style>
 </head>
 <body>
@@ -1049,6 +1128,7 @@
 </section>
 
 
+<footer class="rnp-footer" aria-label="colophon"><div class="foot-inner"><div class="foot-brand"><div class="foot-mark"><svg viewBox="0 0 64 80" aria-hidden="true"><path fill-rule="evenodd" d="M32 2 C 40 12, 56 18, 60 36 C 62 50, 52 64, 38 72 L 36 78 Q 32 80, 28 78 L 26 72 C 12 64, 2 50, 4 36 C 8 18, 24 12, 32 2 Z M 32 14 C 28 22, 18 28, 14 38 C 13 46, 18 54, 28 60 L 32 24 L 36 60 C 46 54, 51 46, 50 38 C 46 28, 36 22, 32 14 Z"/></svg><span>Nilekani Philanthropies</span></div><p>A Good Society — an exhibit. An argument about what makes a society possible, assembled from three decades of practice, two intersecting lives, and the spaces between civil society, state and market.</p></div><nav class="foot-nav" aria-label="sections"><a href="#preface">Preface</a><a href="#triad">Triad</a><a href="#two-questions">Two&nbsp;Questions</a><a href="#rohini">Society</a><a href="#nandan">Systems</a><a href="#bridge">Public&nbsp;Goods</a><a href="#field">The&nbsp;Field</a><a href="#invitation">Invitation</a></nav></div><div class="foot-bottom"><span>Rohini &amp; Nandan Nilekani · Giving since 1992</span><a href="https://nilekaniphilanthropies.org/" target="_blank" rel="noopener noreferrer">nilekaniphilanthropies.org</a></div></footer>
 <script>
   // reveal on scroll
   (function(){
