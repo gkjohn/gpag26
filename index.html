@@ -580,6 +580,19 @@
     .pool:last-child{border-bottom:none}
   }
 
+  /* quiet reference links — faint rule of the current text colour,
+     deepening on hover; works on both paper and the dark bridge */
+  a.ref{
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+    transition: border-color .2s ease;
+  }
+  a.ref:hover, a.ref:focus-visible{
+    border-bottom-color: currentColor;
+    outline: none;
+  }
+
   /* CASE STUDIES — impact, re-rendered in the exhibit voice */
   .cases{
     margin-top: var(--space-5);
@@ -1013,7 +1026,7 @@
       <div class="org reveal">
         <div class="marker">IV.1</div>
         <div>
-          <div class="org-name">Pratham Books · StoryWeaver</div>
+          <div class="org-name"><a class="ref" href="https://prathambooks.org/" target="_blank" rel="noopener noreferrer">Pratham Books</a> · <a class="ref" href="https://storyweaver.org.in/" target="_blank" rel="noopener noreferrer">StoryWeaver</a></div>
           <div class="desc">A book in every child's hand. A story in her mother tongue.</div>
           <div class="stat">68,000+ stories · 380+ languages · read 34 million times</div>
         </div>
@@ -1021,7 +1034,7 @@
       <div class="org reveal">
         <div class="marker">IV.2</div>
         <div>
-          <div class="org-name">Arghyam</div>
+          <div class="org-name"><a class="ref" href="https://arghyam.org/" target="_blank" rel="noopener noreferrer">Arghyam</a></div>
           <div class="desc">Water as relationship. Not resource.</div>
           <div class="stat">2.4M people reached · 12M households · 200+ partners</div>
         </div>
@@ -1029,7 +1042,7 @@
       <div class="org reveal">
         <div class="marker">IV.3</div>
         <div>
-          <div class="org-name">The Nilekani Centre for Brain &amp; Mind</div>
+          <div class="org-name"><a class="ref" href="https://www.cbmnimhans.org/" target="_blank" rel="noopener noreferrer">The Nilekani Centre for Brain &amp; Mind</a></div>
           <div class="desc">A patient, long commitment to mental health — research, care and public dialogue.</div>
           <div class="stat">Endowed · long-horizon · clinical &amp; civic</div>
         </div>
@@ -1080,7 +1093,7 @@
         <div class="chapter-num">Nandan Nilekani</div>
         <div class="name">What holds<br>a <em style="font-style:italic;color:var(--accent-nandan)">system</em> together.</div>
         <div class="pose" style="font-style:normal; font-family: var(--serif); font-weight: 400">
-          Infosys, 1981. Seven people. A Pune apartment. <span class="accent">$250.</span>
+          <a class="ref" href="https://www.infosys.com/" target="_blank" rel="noopener noreferrer">Infosys</a>, 1981. Seven people. A Pune apartment. <span class="accent">$250.</span>
         </div>
         <div class="body" style="margin-top: 1.5rem">
           <p>One of the companies that made India the world's technology back office. Then he left to do something harder — to build the rails beneath an economy of 1.4 billion people, in the open, for anyone to use.</p>
@@ -1093,7 +1106,7 @@
       <div class="org reveal">
         <div class="marker">V.1</div>
         <div>
-          <div class="org-name">Aadhaar</div>
+          <div class="org-name"><a class="ref" href="https://uidai.gov.in/" target="_blank" rel="noopener noreferrer">Aadhaar</a></div>
           <div class="desc">A verifiable identity for 1.4 billion. For many: the first time the state could see them.</div>
           <div class="stat">Foundational ID · enrolment infrastructure</div>
         </div>
@@ -1118,7 +1131,7 @@
         <div class="marker">V.4</div>
         <div>
           <div class="org-name">Institutions that outlast individuals</div>
-          <div class="desc">IIT Bombay. IIHS. NCAER. Long-horizon, civic, durable.</div>
+          <div class="desc"><a class="ref" href="https://www.iitb.ac.in/" target="_blank" rel="noopener noreferrer">IIT Bombay</a>. <a class="ref" href="https://iihs.co.in/" target="_blank" rel="noopener noreferrer">IIHS</a>. <a class="ref" href="https://www.ncaer.org/" target="_blank" rel="noopener noreferrer">NCAER</a>. Long-horizon, civic, durable.</div>
           <div class="stat">Endowed · multi-decade · research &amp; policy</div>
         </div>
       </div>
@@ -1231,7 +1244,7 @@
       </div>
       <div class="cell">
         <div class="num"><em>22</em> languages</div>
-        <div class="cap">Open language AI by AI4Bharat — now extending beyond India to the Global Majority.</div>
+        <div class="cap">Open language AI by <a class="ref" href="https://ai4bharat.iitm.ac.in/" target="_blank" rel="noopener noreferrer">AI4Bharat</a> — now extending beyond India to the Global Majority.</div>
       </div>
       <div class="cell">
         <div class="num"><em>7&nbsp;million</em></div>
@@ -1269,7 +1282,7 @@
     <div class="cases">
       <div class="case reveal">
         <div class="case-id">
-          <span class="org">Agami</span>
+          <span class="org"><a class="ref" href="https://agami.in/" target="_blank" rel="noopener noreferrer">Agami</a></span>
           <span class="domain">Access to justice</span>
         </div>
         <div class="case-body">
@@ -1285,21 +1298,21 @@
 
       <div class="case reveal">
         <div class="case-id">
-          <span class="org">SEEDS India</span>
+          <span class="org"><a class="ref" href="https://www.seedsindia.org/" target="_blank" rel="noopener noreferrer">SEEDS India</a></span>
           <span class="domain">Climate resilience</span>
         </div>
         <div class="case-body">
           <div class="claim">Resilience, from where it is <em>felt first.</em></div>
           <p class="desc">Disaster resilience, built and recorded at the hyper-local scale.</p>
           <div class="case-list">
-            <div class="item"><span class="k">AKSHVI</span><span class="v">An open data platform — a hyper-local, citizen-reported loss database.</span></div>
+            <div class="item"><span class="k"><a class="ref" href="https://www.seedsindia.org/" target="_blank" rel="noopener noreferrer">AKSHVI</a></span><span class="v">An open data platform — a hyper-local, citizen-reported loss database.</span></div>
           </div>
         </div>
       </div>
 
       <div class="case reveal">
         <div class="case-id">
-          <span class="org">IIHS</span>
+          <span class="org"><a class="ref" href="https://iihs.co.in/" target="_blank" rel="noopener noreferrer">IIHS</a></span>
           <span class="domain">Urban India</span>
         </div>
         <div class="case-body">
@@ -1322,17 +1335,17 @@
           <div class="claim">Culture, treated as <em>infrastructure.</em></div>
           <p class="desc">Spaces where public life is made — theatre, conversation, science.</p>
           <div class="case-list">
-            <div class="item"><span class="k">Ranga Shankara</span><span class="v">A theatre dedicated to the performing arts.</span></div>
-            <div class="item"><span class="k">Bangalore Int'l Centre</span><span class="v">The go-to place for informed conversations.</span></div>
+            <div class="item"><span class="k"><a class="ref" href="https://www.rangashankara.org/" target="_blank" rel="noopener noreferrer">Ranga Shankara</a></span><span class="v">A theatre dedicated to the performing arts.</span></div>
+            <div class="item"><span class="k"><a class="ref" href="https://bangaloreinternationalcentre.org/" target="_blank" rel="noopener noreferrer">Bangalore Int'l Centre</a></span><span class="v">The go-to place for informed conversations.</span></div>
             <div class="item"><span class="k">Srujana Auditorium</span><span class="v">A state-of-the-art facility for a small town.</span></div>
-            <div class="item"><span class="k">Science Gallery Bengaluru</span><span class="v">Shaping culture through science.</span></div>
+            <div class="item"><span class="k"><a class="ref" href="https://bengaluru.sciencegallery.com/" target="_blank" rel="noopener noreferrer">Science Gallery Bengaluru</a></span><span class="v">Shaping culture through science.</span></div>
           </div>
         </div>
       </div>
 
       <div class="case reveal">
         <div class="case-id">
-          <span class="org">EkStep Foundation</span>
+          <span class="org"><a class="ref" href="https://ekstep.org/" target="_blank" rel="noopener noreferrer">EkStep Foundation</a></span>
           <span class="domain">Learning → earning</span>
         </div>
         <div class="case-body">
@@ -1341,7 +1354,7 @@
           <div class="case-list">
             <div class="item"><span class="k">Bachpan Manao</span><span class="v">A national movement for early childhood — play, care, curiosity. 100+ educators, caregivers, creators, organisations.</span></div>
             <div class="item"><span class="k">AXL</span><span class="v">AI-powered foundational learning for reading and maths, in low-infrastructure schools. Adopted by three states.</span></div>
-            <div class="item"><span class="k">Sunbird</span><span class="v">An open toolbox for safe, scalable digital infrastructure — for governments and ecosystem builders.</span></div>
+            <div class="item"><span class="k"><a class="ref" href="https://sunbird.org/" target="_blank" rel="noopener noreferrer">Sunbird</a></span><span class="v">An open toolbox for safe, scalable digital infrastructure — for governments and ecosystem builders.</span></div>
             <div class="item"><span class="k">Blue Dots AI</span><span class="v">Hyperlocal AI connecting people to jobs, services and schemes nearby. 15K+ jobs in pilot; 10M by 2030.</span></div>
             <div class="item"><span class="k">OpenAgriNet</span><span class="v">Voice-AI for farmers — powering MahaVistaar, BharatVistaar and Amul AI's SarlaBen bot. 7M+ farmers, in local languages.</span></div>
           </div>
@@ -1350,7 +1363,7 @@
 
       <div class="case reveal">
         <div class="case-id">
-          <span class="org">Nilgiris</span>
+          <span class="org"><a class="ref" href="https://en.wikipedia.org/wiki/Nilgiris_-_A_Shared_Wilderness" target="_blank" rel="noopener noreferrer">Nilgiris</a></span>
           <span class="domain">A shared wilderness</span>
         </div>
         <div class="case-body">
@@ -1359,14 +1372,13 @@
           <div class="case-stats">
             <div class="s"><div class="n">51</div><div class="l">theatres</div></div>
             <div class="s"><div class="n">24</div><div class="l">cities</div></div>
-            <div class="s"><div class="n">1</div><div class="l">of its kind</div></div>
           </div>
         </div>
       </div>
 
       <div class="case reveal">
         <div class="case-id">
-          <span class="org">Manotsava</span>
+          <span class="org"><a class="ref" href="https://www.nationalmentalhealthfestival.com/" target="_blank" rel="noopener noreferrer">Manotsava</a></span>
           <span class="domain">Mental health</span>
         </div>
         <div class="case-body">
@@ -1393,31 +1405,31 @@
     <div class="pools">
       <div class="pool reveal">
         <div class="num">Pool · 01</div>
-        <h3>Centre for Exponential Change</h3>
+        <h3><a class="ref" href="https://centreforexponentialchange.org/" target="_blank" rel="noopener noreferrer">Centre for Exponential Change</a></h3>
         <p class="copy">A global network supporting system orchestrators — the people who build the connective tissue between civil society, state and market.</p>
         <div class="partners">
-          <span>Skoll Foundation</span><span>New Profit</span><span>Instituto Beja</span><span>Yellowwoods</span>
+          <span><a class="ref" href="https://skoll.org/" target="_blank" rel="noopener noreferrer">Skoll Foundation</a></span><span><a class="ref" href="https://www.newprofit.org/" target="_blank" rel="noopener noreferrer">New Profit</a></span><span>Instituto Beja</span><span>Yellowwoods</span>
         </div>
       </div>
       <div class="pool reveal">
         <div class="num">Pool · 02</div>
-        <h3>Co-Impact</h3>
+        <h3><a class="ref" href="https://co-impact.org/" target="_blank" rel="noopener noreferrer">Co-Impact</a></h3>
         <p class="copy">Patient capital for systems change in health, education and gender equity. Long horizons. Country-led. Built to outlast its funders.</p>
         <div class="partners">
-          <span>Gates Foundation</span><span>MacKenzie Scott</span><span>Jeff Skoll</span><span>Children's Investment Fund Foundation</span><span>Minderoo Foundation</span>
+          <span><a class="ref" href="https://www.gatesfoundation.org/" target="_blank" rel="noopener noreferrer">Gates Foundation</a></span><span>MacKenzie Scott</span><span>Jeff Skoll</span><span><a class="ref" href="https://ciff.org/" target="_blank" rel="noopener noreferrer">Children's Investment Fund Foundation</a></span><span><a class="ref" href="https://www.minderoo.org/" target="_blank" rel="noopener noreferrer">Minderoo Foundation</a></span>
         </div>
       </div>
       <div class="pool reveal">
         <div class="num">Pool · 03</div>
-        <h3>Co-Develop</h3>
+        <h3><a class="ref" href="https://www.codevelop.fund/" target="_blank" rel="noopener noreferrer">Co-Develop</a></h3>
         <p class="copy">A pooled fund for country-led adoption of Digital Public Infrastructure, at population scale.</p>
         <div class="partners">
-          <span>Gates Foundation</span><span>Omidyar Network</span><span>Rockefeller</span><span>Wellcome</span><span>Khosla Family</span><span>Dhanam</span><span>SVCF</span>
+          <span><a class="ref" href="https://www.gatesfoundation.org/" target="_blank" rel="noopener noreferrer">Gates Foundation</a></span><span><a class="ref" href="https://omidyar.com/" target="_blank" rel="noopener noreferrer">Omidyar Network</a></span><span><a class="ref" href="https://www.rockefellerfoundation.org/" target="_blank" rel="noopener noreferrer">Rockefeller</a></span><span><a class="ref" href="https://wellcome.org/" target="_blank" rel="noopener noreferrer">Wellcome</a></span><span>Khosla Family</span><span>Dhanam</span><span><a class="ref" href="https://www.siliconvalleycf.org/" target="_blank" rel="noopener noreferrer">SVCF</a></span>
         </div>
       </div>
       <div class="pool reveal">
         <div class="num">Pool · 04</div>
-        <h3>Centre for DPI</h3>
+        <h3><a class="ref" href="https://cdpi.dev/" target="_blank" rel="noopener noreferrer">Centre for DPI</a></h3>
         <p class="copy">Helping 25+ countries build their own digital public infrastructure. Implementation knowledge. Not export.</p>
         <div class="partners">
           <span>Country-led</span><span>Open-source</span><span>Multilateral</span>
@@ -1487,7 +1499,7 @@
           <path d="M14 1 C 11.5 4 9 7 8 11 C 7 14 7 17 8 19 C 9 21.5 11 22.5 13 22 C 13.2 21.4 13.5 21 14 21 C 14.5 21 14.8 21.4 15 22 C 17 22.5 19 21.5 20 19 C 21 17 21 14 20 11 C 19 7 16.5 4 14 1 Z"/>
           <line x1="14" y1="22" x2="14" y2="26.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
         </svg>
-        <span class="meta" style="letter-spacing:.18em">Rohini &amp; Nandan Nilekani &middot; Philanthropies</span>
+        <span class="meta" style="letter-spacing:.18em"><a class="ref" href="https://nilekaniphilanthropies.org/" target="_blank" rel="noopener noreferrer">Rohini &amp; Nandan Nilekani &middot; Philanthropies</a></span>
       </div>
     </div>
   </div>
